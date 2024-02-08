@@ -62,6 +62,8 @@ def majority_element(nums):
 	        max_count -= 1
 	return max_value
 
+	#SOLUTION 3
+
 	#using the idea that the majority will take up len(nums), so thus the middle element should be the majority
 	#Time Complexity: O(nlogn)
 	#Space Complexity O(1)
