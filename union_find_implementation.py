@@ -210,7 +210,7 @@ class PathCompressionUnionFind2():
 		"""
 		return self.__root__(p) == self.__root__(q)
 
-class PathCompressionWeightedQuickUnionFind():
+class UnionFind():
 	"""
 	Path Compression Weighted Quick-Union Find
 	"""
@@ -259,7 +259,7 @@ class PathCompressionWeightedQuickUnionFind():
 			self.size[change_to] += self.size[change_from]
 
 
-uf = WeightedQuickUnionFind(9)
+uf = UnionFind(9)
 uf.printArray()
 uf.union(0,1)
 uf.printArray()
