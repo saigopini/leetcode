@@ -58,8 +58,17 @@ class LinkedList():
         current.dataval = temp.dataval
         current.nextval = temp.nextval
         self.length-=1
-        
-        
+    
+    def deleteAtMiddleElement(self):
+        if self.isEmpty() == True: return
+        prev = None
+        slow, fast = self.head, self.head
+        while fast and fast.nextval:
+            prev = slow
+            slow = slow.nextval
+            fast = fast.nextval.nextval
+        prev.nextval = slow.nextval     
+        self.length -= 1
     
     def deleteAtEnd(self):
         if self.isEmpty() == True: return
@@ -72,11 +81,34 @@ class LinkedList():
             counter +=1
         current.nextval = None
         self.length -= 1
+    
+    def deleteAtEnd2(self):
+        if self.isEmpty() == True: return
+        prev = self.head
+        current = self.head
+        while current.nextval:
+            prev = current
+            current = current.nextval
+        prev.nextval = None
+        self.length -= 1
+
 
     def deleteAtFront(self):
         if self.isEmpty() == True: return
         self.head = self.head.nextval
         self.length -= 1
+    
+    def reverseList(self):
+        current = self.head
+        prev = None
+        #use two pointers, prev and current
+        #prev keeps track of what current used to point to and sets it to the current
+        while current:
+            nxt = current.nextval
+            current.nextval = prev #current.next is pointing to prev
+            prev = current
+            current = nxt
+        self.head = prev
 
     def printLength(self):
         print(self.length)
@@ -88,9 +120,15 @@ l.insertAtFront('p')
 l.insertAtMiddle("c", "a")
 l.insertAtBack("k")
 l.traverseList()
-l.deleteAtFront()
+l.reverseList()
+l.traverseList()
+print("delete end")
 l.deleteAtEnd()
 l.traverseList()
+print("delete end")
+l.deleteAtEnd2()
+l.traverseList()
+
 l.printLength()
 
 

@@ -15,10 +15,10 @@ class Queue():
         output += " ---> None"
         print(output)
     
-    def push(self, data): #insert always at the front
+    def enqueue(self, data): #insert always at the front
         self.queue.insert(0, data)
     
-    def pop(self): #removes at the front
+    def dequeue(self): #removes at the front
         if self.getLength == 0: return "Empty Queue"
         del self.queue[0]
 
@@ -36,12 +36,12 @@ class QueueLinkedList():
         output += " None "
         print(output)
 
-    def push(self, data):
+    def enqueue(self, data):
         node = Node(data, self.head)
         self.head = node
         self.length += 1
     
-    def pop(self): #remove at the front
+    def dequeue(self): #remove at the front
         if self.head == None: return "Empty list"
         self.head = self.head.nextval
         self.length -=1
@@ -49,15 +49,15 @@ class QueueLinkedList():
     
     
 q = QueueLinkedList()
-q.push("n")
-q.push("i")
-q.push("l")
-q.push("r")
-q.push("e")
-q.push("m")
+q.enqueue("n")
+q.enqueue("i")
+q.enqueue("l")
+q.enqueue("r")
+q.enqueue("e")
+q.enqueue("m")
 q.traverseQueue()
-q.pop()
-q.pop()
+q.dequeue()
+q.dequeue()
 q.traverseQueue()
 
 
