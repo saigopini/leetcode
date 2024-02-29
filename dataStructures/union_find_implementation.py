@@ -215,6 +215,7 @@ class UnionFind():
 	Path Compression Weighted Quick-Union Find
 	"""
 	def __init__(self, size):
+		self.n = size
 		self.parent = [i for i in range(size)]
 		self.size = [1 for i in range(size)]
 
@@ -258,6 +259,68 @@ class UnionFind():
 			self.parent[change_from] = change_to
 			self.size[change_to] += self.size[change_from]
 
+class UnionFindLargestComponent():
+	"""
+	Path Compression Weighted Quick-Union Find
+	"""
+	def __init__(self, size):
+		self.n = size
+		self.parent = [i for i in range(size)]
+		self.size = [1 for i in range(size)]
+
+	def printArray(self):
+		print("parent: " + str(self.parent))
+		print("size: " + str(self.size))
+
+	def __root__(self, i):
+		"""
+		:type i: int
+		:purpose: find root of i
+		:type i: int 
+		"""
+		while i != self.parent[i]:
+			#self.parent[i] = self.parent[self.parent[i]]
+			i = self.parent[i]
+		return i
+
+	def isConnected(self, p, q):
+		"""
+		:type p: int
+		:type q: int
+		:rtype
+		"""
+		return self.__root__(p) == self.__root__(q)
+
+	def find(self, p):
+		"""
+		"""
+		connectedComponents = []
+		parent = self.parent[p]
+		for i in range(0, len(self.parent)):
+			if self.parent[i] == parent:
+				connectedComponents.append(i)
+
+		
+		print("connectedComponents: " + str(connectedComponents))
+		return max(connectedComponents)
+
+	def union(self, p, q):
+		"""
+		:type p: int
+		:type q: int
+		:rtype: None
+		"""
+		if self.size[p] < self.size[q]:
+			change_from = self.__root__(p)
+			change_to = self.__root__(q)
+			self.parent[change_from] = change_to
+			self.size[change_to] += self.size[change_from]
+		else:
+			change_from = self.__root__(q)
+			change_to = self.__root__(p)
+			self.parent[change_from] = change_to
+			self.size[change_to] += self.size[change_from]
+
 
 uf = UnionFind(9)
 uf.printArray()
@@ -269,4 +332,16 @@ print(uf.find(0,1))
 print(uf.find(8,3))
 uf.union(2,3)
 print(uf.find(2,3))
+
+uf1 = UnionFindLargestComponent(9)
+uf1.union(0,1)
+uf1.union(1,3)
+uf1.union(4,5)
+uf1.union(7,8)
+uf1.union(3,8)
+uf1.printArray()
+print(uf1.find(3))
+
+
+
 
